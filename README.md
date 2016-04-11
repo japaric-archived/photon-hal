@@ -1,3 +1,5 @@
+[![Travis](https://travis-ci.org/japaric/particle-hal.svg?branch=master)](https://travis-ci.org/japaric/particle-hal)
+
 # `particle-hal`
 
 > Low level bindings to [particle]'s [HAL][0] (Hardware Abstraction Layer)
@@ -11,7 +13,7 @@ First, you'll need these dependencies:
 
 - [GCC for ARM Cortex processors][1]
 - Nightly Rust
-- [bindgen] `generate.sh` will `cargo install` it for you if you don't have it installed already.
+- [bindgen]. `generate.sh` will `cargo install` it for you if you don't have it installed already.
 
 [1]: https://github.com/spark/firmware/blob/develop/docs/dependencies.md#1-gcc-for-arm-cortex-processors
 [bindgen]: https://github.com/crabtw/rust-bindgen
