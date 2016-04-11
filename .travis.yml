@@ -6,7 +6,10 @@ services:
   - docker
 
 script:
-  - bash ci.sh
+  - bash ci/script.sh
+
+after_success:
+  - bash ci/after_success.sh
 
 branches:
   only: master
@@ -14,3 +17,7 @@ branches:
 notifications:
   email:
     on_success: never
+
+env:
+  global:
+    - secure: Ig0XYS56azcIKZSouSRj+QQ+EWhJVVM5N8lbPfLkFIZpC4hyVb0yYtZVB5DbOHw4NEhKkeAdSbKQRSPeC4UX8uxen9Bv61gReTosR0SJzZtOHDi0lJuAwA9eJXkAKImJjCvwLx3Wt42hSuDC0V71gXFCeN9RQ/lnWsWdl8V/SaG0WNDILlUaaMu1ehAhObGszsE7sQM+/pnZbqoS3vFFSVDyP38gK1vsXGEcE21B542Stfr53UuPkMBW9bKNnJE2M3/zB2nhULConGGFlfpjIky0R2VKSGf+cU/fcr3/cDdxB86iYvaDr4hHItEDdU4w84wqAgvgQdk9apxmTG1HH8EtfNH1ZdeyQrRWqxH5s8fp1MwLZsSn8jRLxZtOuNPpz6rQ5NH/LUWxAcLcvXU5eMBK/8CAduzB2TzeYjktboGRVYJN8fyLu2pkMkxPWHl9p5Sajl3M7JisZvPTGhsB63TPa9AlE2P32ItlEZbSTnrgVdFtCFurG/Dy+qsAPpGBM3pYIga1CFDFygUzNzvr2mlmfH0TpGOfZSTTQA7pQdFc8RCd6PospNtJUBwax4LzLWbBnbUhOQsT4zo0NsrgrdTfaYuP+Nu5b17pEMAo8FKf+mSdhshhL1RZP1xQLNTfglVdKTOwCKt6WqvLECrB3zDe+Aon7V9foUfJHn0PwnA=
