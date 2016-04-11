@@ -11,9 +11,8 @@ main() {
         git clone --depth 1 https://github.com/japaric/particle-hal
         cd particle-hal
         bash generate.sh
-        cargo install xargo
-        curl -LO https://github.com/japaric/photon/raw/master/photon.json
-        xargo build --target photon
+        cargo build --verbose
+        cargo doc
     '
 }
 
