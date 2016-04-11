@@ -12,7 +12,7 @@ main() {
         cd particle-hal
         bash generate.sh
         cargo install xargo
-        curl -O https://github.com/japaric/photon/raw/master/photon.json
+        curl -LO https://github.com/japaric/photon/raw/master/photon.json
         xargo build --target photon
     '
 }
