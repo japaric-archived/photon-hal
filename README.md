@@ -5,7 +5,9 @@
 > Low level bindings to [particle]'s [HAL][0] (Hardware Abstraction Layer)
 
 [particle]: https://www.particle.io/
-[0]: https://github.com/spark/firmware/tree/develop/hal
+[0]: https://github.com/spark/firmware/tree/develop/hal/inc
+
+## [Docs](http://japaric.github.io/particle-hal/particle_hal/)
 
 ## Generating bindings
 
