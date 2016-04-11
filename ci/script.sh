@@ -13,7 +13,7 @@ main() {
     docker rm $container
 
     docker run travis bash -ex -c '
-        chown -R particle:particle particle-hal
+        sudo chown -R particle:particle particle-hal
         cd particle-hal
         bash generate.sh
         cargo build --verbose
