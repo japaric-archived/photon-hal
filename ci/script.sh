@@ -3,24 +3,17 @@
 set -ex
 
 main() {
-    local tag=2016-04-11 container
+    local tag=2016-04-11
 
-    docker run japaric/photon:$tag
-    container=$(docker ps -a -q)
+    # The particle user has id = 1000, but this may not match the travis user id. To workaround this
+    # issue, make everything world write-able.
+    chmod -R a+w .
 
-    docker cp $(pwd) $container:/home/particle/
-    docker commit $container travis
-    docker rm $container
-
-    docker run travis bash -ex -c '
-        sudo chown -R particle:particle particle-hal
-        cd particle-hal
+    docker run -v $(pwd):/mnt -w /mnt japaric/photon:$tag bash -ex -c '
         bash generate.sh
         cargo build --verbose
         cargo doc
     '
-    container=$(docker ps -a -q)
-    docker cp $container:/home/particle/$(basename $(pwd))/target .
 }
 
 main
