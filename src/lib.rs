@@ -1,13 +1,17 @@
-//! Low level bindings to [particle] [HAL][0] (Hardware Abstraction Layer)
-//!
-//! [particle]: https://www.particle.io/
-//! [0]: https://github.com/spark/firmware/tree/develop/hal/inc
+//! Low level bindings to the Particle HAL
 
+#![deny(warnings)]
 #![no_std]
 
-#[allow(non_camel_case_types)]
-pub mod delay;
-#[allow(non_camel_case_types)]
-pub mod gpio;
+/// C types
+pub mod ctypes;
 
-mod ty;
+/// Delay
+#[allow(non_camel_case_types)]
+#[allow(non_upper_case_globals)]
+pub mod delay;
+
+/// General purpose input/output
+#[allow(non_camel_case_types)]
+#[allow(non_upper_case_globals)]
+pub mod gpio;

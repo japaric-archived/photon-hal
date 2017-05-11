@@ -1,42 +1,29 @@
-#!/bin/bash
-
-# Generates low level bindings to particle's HAL
-
 set -ex
 
-td=$(mktemp -d)
+main() {
+    local version=v0.6.2
 
-mk_bindgen() {
-    command -v bindgen >/dev/null 2>&1 || \
-        cargo install --git https://github.com/crabtw/rust-bindgen
-}
+    # TODO add the other modules
+    local modules=(
+        delay
+        gpio
+    )
 
-fetch_src() {
-    curl -L https://github.com/spark/firmware/archive/latest.tar.gz | \
-        tar --strip-components 1 -C $td -xz
-}
+    local td=$(mktemp -d)
+    curl -L https://github.com/spark/firmware/archive/$version.tar.gz | \
+        tar --strip-components=1 -xz -C $td
 
-gen_bindings() {
-    # TODO Bind to more modules. Currently we just bind to delay and gpio
-    local modules=( delay gpio)
+    for module in ${modules[@]}; do
+        # this no longer seems to be necessary?
+        # -- -I $(arm-none-eabi-gcc -print-search-dirs | grep install | cut -d':' -f2)/include \
 
-    for module in "${modules[@]}"; do
-        bindgen $td/hal/inc/${module}_hal.h \
-                -I $(arm-none-eabi-gcc -print-search-dirs | grep install | cut -d':' -f2)/include | \
-            sed 's/::std::os::raw::/::ty::/g' > src/$module.rs
+        bindgen --use-core \
+                --ctypes-prefix ::ctypes \
+                $td/hal/inc/${module}_hal.h \
+                > src/$module.rs
     done
 
-}
-
-cleanup() {
-    rm -r $td
-}
-
-main() {
-    mk_bindgen
-    fetch_src
-    gen_bindings
-    cleanup
+    rm -rf $td
 }
 
 main
