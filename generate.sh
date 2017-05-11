@@ -7,6 +7,8 @@ main() {
     local modules=(
         delay
         gpio
+        usart
+        usb
     )
 
     local td=$(mktemp -d)

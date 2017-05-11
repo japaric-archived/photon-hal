@@ -15,3 +15,13 @@ pub mod delay;
 #[allow(non_camel_case_types)]
 #[allow(non_upper_case_globals)]
 pub mod gpio;
+
+/// Serial communication (not via USB)
+#[allow(non_camel_case_types)]
+#[allow(non_upper_case_globals)]
+pub mod usart;
+
+/// USB Virtual COM Port and HID device
+#[allow(non_camel_case_types)]
+#[allow(non_upper_case_globals)]
+pub mod usb;
