@@ -25,3 +25,8 @@ pub mod usart;
 #[allow(non_camel_case_types)]
 #[allow(non_upper_case_globals)]
 pub mod usb;
+
+/// Device and platform identifiers
+#[allow(non_camel_case_types)]
+#[allow(non_upper_case_globals)]
+pub mod deviceid;

@@ -9,6 +9,7 @@ main() {
         gpio
         usart
         usb
+        deviceid
     )
 
     local td=$(mktemp -d)
