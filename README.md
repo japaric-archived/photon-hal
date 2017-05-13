@@ -1,11 +1,8 @@
 # `particle-hal`
 
-> Low level bindings to the Particle HAL (Hardware Abstraction Layer)
+> [WIP] Low level bindings to the Particle HAL (Hardware Abstraction Layer)
 
 Firmware version: v0.6.2
-
-**NOTE** These bindings only include the `delay` and `gpio` modules at the
-moment.
 
 # API Documentation
 
