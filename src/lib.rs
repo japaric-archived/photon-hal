@@ -13,10 +13,20 @@ pub type c_uchar = u8;
 pub type c_uint = u32;
 pub type int32_t = i32;
 pub type pin_t = u16;
+pub type uint16_t = u16;
 pub type uint32_t = u32;
 pub type uint8_t = u8;
 
 pub type p_user_function_int_str_t = extern "C" fn(&String) -> c_int;
+
+#[repr(C)]
+pub struct spark_variable_t {
+    pub size: uint16_t,
+    pub update: extern "C" fn(name: *const c_char,
+                              ty: Spark_Data_TypeDef,
+                              var: *const c_void,
+                              reserved: *mut c_void),
+}
 
 // NOTE copied from the libc crate
 // Use repr(u8) as LLVM expects `void*` to be the same as `i8*` to help enable
@@ -57,9 +67,7 @@ impl ops::Deref for String {
     type Target = [u8];
 
     fn deref(&self) -> &[u8] {
-        unsafe {
-            slice::from_raw_parts(self.as_ptr(), self.len())
-        }
+        unsafe { slice::from_raw_parts(self.as_ptr(), self.len()) }
     }
 }
 
@@ -74,6 +82,14 @@ pub enum PinMode {
     AN_INPUT = 6,
     AN_OUTPUT = 7,
     PIN_MODE_NONE = 255,
+}
+
+#[repr(u8)]
+pub enum Spark_Data_TypeDef {
+    CLOUD_VAR_BOOLEAN = 1,
+    CLOUD_VAR_INT = 2,
+    CLOUD_VAR_STRING = 4,
+    CLOUD_VAR_DOUBLE = 9,
 }
 
 extern "C" {
@@ -98,6 +114,12 @@ extern "C" {
         _: *const c_char,
         _: p_user_function_int_str_t,
         _: *mut c_void,
+    ) -> bool;
+    pub fn spark_variable(
+        _: *const c_char,
+        _: *const c_void,
+        _: Spark_Data_TypeDef,
+        _: *mut spark_variable_t,
     ) -> bool;
 }
 
@@ -503,7 +525,6 @@ extern "C" {
 // DYNALIB_FN(33, services, led_set_update_enabled, void(int, void*))
 // DYNALIB_FN(34, services, led_update_enabled, int(void*))
 // DYNALIB_FN(35, services, led_update, void(system_tick_t, LEDStatusData*, void*))
-// DYNALIB_FN(0, system_cloud, spark_variable, bool(const char*, const void*, Spark_Data_TypeDef, spark_variable_t*))
 // DYNALIB_FN(2, system_cloud, spark_process, void(void))
 // DYNALIB_FN(3, system_cloud, spark_cloud_flag_connect, void(void))
 // DYNALIB_FN(4, system_cloud, spark_cloud_flag_disconnect, void(void))
