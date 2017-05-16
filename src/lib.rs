@@ -28,7 +28,7 @@ impl ops::Deref for String {
     type Target = [u8];
 
     fn deref(&self) -> &[u8] {
-        unsafe { slice::from_raw_parts(self.as_ptr(), self.len()) }
+        unsafe { slice::from_raw_parts(self.buffer, self.len as usize) }
     }
 }
 
