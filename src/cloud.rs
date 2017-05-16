@@ -15,10 +15,7 @@ pub fn function(
     let mut buffer = [0; 13];
     buffer[..name.len()].copy_from_slice(name.as_bytes());
 
-    if unsafe {
-        ll::spark_function(buffer.as_ptr() as *const _, f, ptr::null_mut())
-    }
-    {
+    if unsafe { ll::spark_function(buffer.as_ptr(), f, ptr::null_mut()) } {
         Ok(())
     } else {
         Err(())
@@ -37,7 +34,7 @@ pub fn variable(name: &str, variable: &'static i32) -> Result<(), ()> {
 
     if unsafe {
         ll::spark_variable(
-            buffer.as_ptr() as *const _ as *const _,
+            buffer.as_ptr(),
             variable as *const _ as *const _,
             ll::Spark_Data_TypeDef::CLOUD_VAR_INT,
             ptr::null_mut(),

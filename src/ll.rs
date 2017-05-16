@@ -53,7 +53,10 @@ extern "C" {
     pub fn HAL_Delay_Milliseconds(ms: uint32_t);
     pub fn HAL_Delay_Microseconds(us: uint32_t);
 
-    pub fn HAL_device_ID(dest: *mut uint8_t, dest_len: c_unsigned) -> c_unsigned;
+    pub fn HAL_device_ID(
+        dest: *mut uint8_t,
+        dest_len: c_unsigned,
+    ) -> c_unsigned;
 
     pub fn HAL_GPIO_Read(pin: pin_t) -> int32_t;
     pub fn HAL_GPIO_Write(pin: pin_t, value: uint8_t);

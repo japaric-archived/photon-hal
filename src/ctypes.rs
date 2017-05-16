@@ -1,6 +1,6 @@
 #![allow(non_camel_case_types)]
 
-pub type c_char = c_schar;
+pub type c_char = c_uchar;
 pub type c_int = i32;
 pub type c_schar = i8;
 pub type c_uchar = u8;

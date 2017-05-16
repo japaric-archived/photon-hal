@@ -26,7 +26,7 @@ pub struct String {
 
 impl String {
     pub fn as_ptr(&self) -> *const u8 {
-        self.buffer as *const u8
+        self.buffer
     }
 
     pub fn len(&self) -> usize {
@@ -127,12 +127,8 @@ digital_write!(D6, 6);
 digital_write!(D7, 7);
 
 pub fn sleep_ms(us: u32) {
-    unsafe {
-        ll::HAL_Delay_Milliseconds(us)
-    }
+    unsafe { ll::HAL_Delay_Milliseconds(us) }
 }
 pub fn sleep_us(us: u32) {
-    unsafe {
-        ll::HAL_Delay_Microseconds(us)
-    }
+    unsafe { ll::HAL_Delay_Microseconds(us) }
 }
