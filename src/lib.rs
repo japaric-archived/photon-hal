@@ -24,21 +24,27 @@ pub struct String {
     flags: c_uchar,
 }
 
-impl String {
-    pub fn as_ptr(&self) -> *const u8 {
-        self.buffer
-    }
-
-    pub fn len(&self) -> usize {
-        self.len as usize
-    }
-}
-
 impl ops::Deref for String {
     type Target = [u8];
 
     fn deref(&self) -> &[u8] {
         unsafe { slice::from_raw_parts(self.as_ptr(), self.len()) }
+    }
+}
+
+pub struct UsbSerial;
+
+impl UsbSerial {
+    /// Enables the serial channel with the specified `baud_rate`
+    pub fn begin(&self, baud_rate: u32) {
+        unsafe { ll::USB_USART_Init(baud_rate) }
+    }
+
+    /// Writes binary data to the serial port
+    pub fn write(&self, byte: u8) {
+        unsafe {
+            ll::USB_USART_Send_Data(byte);
+        }
     }
 }
 
@@ -126,9 +132,15 @@ digital_write!(D5, 5);
 digital_write!(D6, 6);
 digital_write!(D7, 7);
 
+/// Returns the ID of the Particle device
+pub fn device_id() -> String {
+    unsafe { ll::spark_deviceID() }
+}
+
 pub fn sleep_ms(us: u32) {
     unsafe { ll::HAL_Delay_Milliseconds(us) }
 }
+
 pub fn sleep_us(us: u32) {
     unsafe { ll::HAL_Delay_Microseconds(us) }
 }
