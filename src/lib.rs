@@ -4,6 +4,9 @@
 #![deny(warnings)]
 #![no_std]
 
+extern crate photon_core;
+extern crate static_ref;
+
 use core::{ops, slice};
 
 pub mod cloud;
@@ -137,10 +140,15 @@ pub fn device_id() -> String {
     unsafe { ll::spark_deviceID() }
 }
 
-pub fn sleep_ms(us: u32) {
-    unsafe { ll::HAL_Delay_Milliseconds(us) }
+/// Waits for `ms` milliseconds
+///
+/// **WARNING** WiFi won't be serviced during this delay. The `App.delay_ms`
+/// method should be preferred over this function.
+pub fn delay_ms(ms: u32) {
+    unsafe { ll::HAL_Delay_Milliseconds(ms) }
 }
 
-pub fn sleep_us(us: u32) {
+/// Waits for `us` microseconds
+pub fn delay_us(us: u32) {
     unsafe { ll::HAL_Delay_Microseconds(us) }
 }

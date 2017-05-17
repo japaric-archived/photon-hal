@@ -5,6 +5,7 @@ pub type c_int = i32;
 pub type c_schar = i8;
 pub type c_uchar = u8;
 pub type c_uint = u32;
+pub type c_ulong = u32;
 pub type c_unsigned = u32;
 pub type int32_t = i32;
 pub type uint16_t = u16;

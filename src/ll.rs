@@ -1,7 +1,8 @@
 //! Low level bindings to the HAL
 
 use String;
-use ctypes::{c_char, c_int, c_unsigned, int32_t, uint16_t, uint32_t, uint8_t};
+use ctypes::{c_char, c_int, c_ulong, c_unsigned, int32_t, uint16_t, uint32_t,
+             uint8_t};
 
 pub type pin_t = u16;
 pub type p_user_function_int_str_t = extern "C" fn(&String) -> c_int;
@@ -69,16 +70,19 @@ extern "C" {
     pub fn USB_USART_Init(baud_rate: uint32_t);
     pub fn USB_USART_Send_Data(byte: uint8_t);
 
+    // system
+    pub fn system_delay_ms(ms: c_ulong, force_no_background_loop: bool);
+
     // system_cloud
     pub fn spark_function(
-        _: *const c_char,
-        _: p_user_function_int_str_t,
+        name: *const c_char,
+        f: p_user_function_int_str_t,
         _: *mut c_void,
     ) -> bool;
     pub fn spark_variable(
-        _: *const c_char,
-        _: *const c_void,
-        _: Spark_Data_TypeDef,
+        name: *const c_char,
+        var: *const c_void,
+        ty: Spark_Data_TypeDef,
         _: *mut spark_variable_t,
     ) -> bool;
     pub fn spark_deviceID() -> String;
@@ -503,7 +507,6 @@ extern "C" {
 // DYNALIB_FN(2, system, set_ymodem_serial_flash_update_handler, void(ymodem_serial_flash_update_handler))
 // DYNALIB_FN(3, system, system_firmwareUpdate, bool(Stream*, void*))
 // DYNALIB_FN(4, system, system_fileTransfer, bool(system_file_transfer_t*, void*))
-// DYNALIB_FN(5, system, system_delay_ms, void(unsigned long, bool))
 // DYNALIB_FN(6, system, system_sleep, void(Spark_Sleep_TypeDef, long, uint32_t, void*))
 // DYNALIB_FN(7, system, system_sleep_pin, void(uint16_t, uint16_t, long, uint32_t, void*))
 // DYNALIB_FN(8, system, system_subscribe_event, int(system_event_t, system_event_handler_t*, void*))

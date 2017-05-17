@@ -1,12 +1,18 @@
-# `particle-hal`
+# `photon-hal`
 
-> [WIP] Low level bindings to the Particle HAL (Hardware Abstraction Layer)
+> [WIP] Low level bindings to the Particle photon HAL (Hardware Abstraction
+> Layer)
 
 Firmware version: v0.6.2
 
-# API Documentation
+# API documentation
 
-Run `cargo doc --open`.
+Run the command:
+
+```
+$ cargo doc --open
+```
+
 
 # License
 
