@@ -1,8 +1,7 @@
 //! Low level bindings to the HAL
 
 use String;
-use ctypes::{c_char, c_int, c_ulong, c_unsigned, int32_t, uint16_t, uint32_t,
-             uint8_t};
+use cty::{c_char, c_int, c_ulong, c_uint, int32_t, uint16_t, uint32_t, uint8_t};
 
 pub type pin_t = u16;
 pub type p_user_function_int_str_t = extern "C" fn(&String) -> c_int;
@@ -61,8 +60,8 @@ extern "C" {
     /// Low level version of `deviceID`
     pub fn HAL_device_ID(
         dest: *mut uint8_t,
-        dest_len: c_unsigned,
-    ) -> c_unsigned;
+        dest_len: c_uint,
+    ) -> c_uint;
 
     // hal_gpio
     /// `digitalWrite`

@@ -4,16 +4,16 @@
 #![deny(warnings)]
 #![no_std]
 
+extern crate cty;
 extern crate photon_core;
 extern crate static_ref;
 
 use core::{ops, slice};
 
 pub mod cloud;
-pub mod ctypes;
 pub mod ll;
 
-use ctypes::{c_char, c_uchar, c_uint};
+use cty::{c_char, c_uchar, c_uint};
 
 #[repr(C)]
 pub struct String {
