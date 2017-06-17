@@ -5,14 +5,7 @@
 
 Firmware version: v0.6.2
 
-# API documentation
-
-Run the command:
-
-```
-$ cargo doc --open
-```
-
+# [Documentation](https://github.com/japaric/photon-hal/photon_hal/index.html)
 
 # License
 
