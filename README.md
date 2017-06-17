@@ -5,7 +5,7 @@
 
 Firmware version: v0.6.2
 
-# [Documentation](https://github.com/japaric/photon-hal/photon_hal/index.html)
+# [Documentation](https://japaric.github.io/photon-hal/photon_hal/index.html)
 
 # License
 
