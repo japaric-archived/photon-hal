@@ -152,3 +152,8 @@ pub fn delay_ms(ms: u32) {
 pub fn delay_us(us: u32) {
     unsafe { ll::HAL_Delay_Microseconds(us) }
 }
+
+/// Returns the current microseconds
+pub fn micros() -> u32 {
+    unsafe { ll::HAL_Timer_Get_Micro_Seconds() }
+}

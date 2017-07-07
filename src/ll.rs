@@ -5,6 +5,7 @@ use cty::{c_char, c_int, c_ulong, c_uint, int32_t, uint16_t, uint32_t, uint8_t};
 
 pub type pin_t = u16;
 pub type p_user_function_int_str_t = extern "C" fn(&String) -> c_int;
+pub type system_tick_t = u32;
 
 #[repr(C)]
 pub struct spark_variable_t {
@@ -97,6 +98,8 @@ extern "C" {
     ) -> bool;
     /// `deviceID`
     pub fn spark_deviceID() -> String;
+    /// `micros`
+    pub fn HAL_Timer_Get_Micro_Seconds() -> system_tick_t;
 }
 
 // TODO add bindings for all functions below, but be sure to know which
