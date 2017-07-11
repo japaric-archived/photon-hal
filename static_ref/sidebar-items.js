@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Ref","`&'a T` that points into `static` data"],["RefMut","`&'a mut T` that points into `static` data"]],"trait":[["StaticRef","A reference that points into `static` data"]]});

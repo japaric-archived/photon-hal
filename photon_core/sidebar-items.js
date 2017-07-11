@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["App","Application context"],["Cloud","Cloud function context"],["Resource","A global resource that can be shared between different contexts"]],"trait":[["Ctxt","Implementation detail. Do not implement this trait."]]});

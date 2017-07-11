@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["function","Registers a new cloud function with the given `name`"],["variable","Registers a new cloud variable with the given `name`"]],"trait":[["IntRef","Implementation detail. Do not implement this trait."]]});
