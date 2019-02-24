@@ -7,6 +7,20 @@ pub type pin_t = u16;
 pub type p_user_function_int_str_t = extern "C" fn(&String) -> c_int;
 pub type system_tick_t = u32;
 
+pub type sock_handle_t = uint32_t;
+pub type sock_result_t = int32_t;
+pub type socklen_t = usize;
+pub type network_interface_t = uint32_t;
+
+pub const AF_INET: uint8_t = 2;
+pub const AF_INET6: uint8_t = 23;
+
+#[repr(C)]
+pub struct sockaddr_t {
+    pub sa_family: uint16_t,
+    pub sa_data: [uint8_t; 14],
+}
+
 #[repr(C)]
 pub struct spark_variable_t {
     pub size: uint16_t,
@@ -100,6 +114,36 @@ extern "C" {
     pub fn spark_deviceID() -> String;
     /// `micros`
     pub fn HAL_Timer_Get_Micro_Seconds() -> system_tick_t;
+
+    ///
+    pub fn socket_active_status(handle: sock_handle_t) -> uint8_t;
+
+    ///
+    pub fn socket_create(
+        family: uint8_t,
+        type_: uint8_t,
+        protocol: uint8_t,
+        port: uint16_t,
+        nif: network_interface_t,
+    ) -> sock_handle_t;
+
+    ///
+    pub fn socket_connect(handle: sock_handle_t, addr: *const sockaddr_t) -> int32_t;
+
+    // DYNALIB_FN(6, hal_socket, socket_send, sock_result_t(sock_handle_t, const void*, socklen_t))
+    ///
+    pub fn socket_send(handle: sock_handle_t, data: *const c_void, len: socklen_t) -> sock_result_t;
+
+    // DYNALIB_FN(7, hal_socket, socket_sendto, sock_result_t(sock_handle_t, const void*, socklen_t, uint32_t, sockaddr_t*, socklen_t))
+    ///
+    pub fn socket_sendto(handle: sock_handle_t, data: *const c_void, len: socklen_t, addr: *const sockaddr_t) -> sock_result_t;
+
+    // DYNALIB_FN(4, hal_socket, socket_receive, sock_result_t(sock_handle_t, void*, socklen_t, system_tick_t))
+    ///
+    pub fn socket_receive(handle: sock_handle_t, data: *const c_void, len: socklen_t, timeout: system_tick_t) -> sock_result_t;
+
+    ///
+    pub fn socket_close(handle: sock_handle_t) -> sock_result_t;
 }
 
 // TODO add bindings for all functions below, but be sure to know which

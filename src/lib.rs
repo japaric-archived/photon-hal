@@ -11,6 +11,7 @@ extern crate static_ref;
 use core::{ops, slice};
 
 pub mod cloud;
+pub mod socket;
 pub mod ll;
 
 use cty::{c_char, c_uchar, c_uint};
